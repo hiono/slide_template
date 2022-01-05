@@ -2,7 +2,7 @@
 
 The following items should be installed as a preliminary preparation.
 
-1. docker
+1. docker & minid
 2. lefthook
 3. make
 4. direnv
