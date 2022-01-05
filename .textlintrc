@@ -1,0 +1,28 @@
+{
+  "rules": {
+    // 技術文書向けの textlint ルールプリセット
+    "preset-ja-technical-writing": {
+      "no-exclamation-question-mark": {
+        // 感嘆符「!！?？」の使用
+        "allowHalfWidthExclamation": false, // + 半角!
+        "allowFullWidthExclamation": true, // + 全角！
+        "allowHalfWidthQuestion": false, // + 半角?
+        "allowFullWidthQuestion": true // + 全角？
+      }
+    },
+    // 日本語周りにおけるスペースの有無 ルールプリセット
+    "preset-ja-spacing": {
+      "ja-space-between-half-and-full-width": {
+        // 半角文字と全角文字の間にスペースを入れるかどうか
+        "space": "always", // + "never" (入れない) or "always" (入れる)
+        "ja-space-around-code": false, // インラインコードの前後に半角スペースを入れる
+        "ja-no-space-between-full-width": true, // 全角文字どうしの間にスペースを入れない
+        "ja-nakaguro-or-halfwidth-space-between-katakana": true, // カタカナ語間は、中黒または半角スペースで区切る
+        "ja-no-space-around-parentheses": true, // かっこの外側、内側ともにスペースを入れない
+        "ja-space-after-exclamation": true, // 文末感嘆符の直後が別文なら全角スペースを入れる
+        "ja-space-after-question": true // 文末疑問符の直後が別文なら全角スペースを入れる
+      }
+    },
+    "spellcheck-tech-word": true
+  }
+}
