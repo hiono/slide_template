@@ -1,16 +1,18 @@
 SHELL     := bash
 
-SUBDIRS = config doc
+.PHONY: build clean distclean
 
-.PHONY: build clean
+all: check build
 
-all: build check
+build:
+	$(MAKE) -C doc $@
 
-all-subdirs:
-	-for dir in $(SUBDIRS); do $(MAKE) -C $$dir $(MAKETARGET); done
+setup_check:
+	$(MAKE) -C config MAKETARGET=build
 
-check:
-	lefthook run pre-commit
+check: setup_check
+	lefthook --no-colors run pre-commit
 
-build clean distclean:
-	$(MAKE) MAKETARGET=$@ all-subdirs
+clean distclean:
+	-rm -f *~ .*~
+	-for dir in config doc; do $(MAKE) -C $$dir $@; done

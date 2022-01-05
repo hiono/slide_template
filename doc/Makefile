@@ -9,13 +9,13 @@ PPTX   = $(MD:%.md=%.pptx)
 build: $(HTML) $(PDF) $(PPTX)
 
 $(HTML): $(MD)
-	docker run -e MARP_USER="$(shell id -u):$(shell id -g)" -v $$PWD:/home/marp/app/ -e LANG=$$LANG marpteam/marp-cli --allow-local-files --html $<
+	docker run -e MARP_USER="$(shell id -u):$(shell id -g)" -v $$PWD:/home/marp/app/ -e LANG="ja_JP.UTF-8" marpteam/marp-cli --allow-local-files --html $<
 
 $(PDF): $(MD)
-	docker run -e MARP_USER="$(shell id -u):$(shell id -g)" -v $$PWD:/home/marp/app/ -e LANG=$$LANG marpteam/marp-cli --allow-local-files --pdf $<
+	docker run -e MARP_USER="$(shell id -u):$(shell id -g)" -v $$PWD:/home/marp/app/ -e LANG="ja_JP.UTF-8" marpteam/marp-cli --allow-local-files --html --pdf $<
 
 $(PPTX): $(MD)
-	docker run -e MARP_USER="$(shell id -u):$(shell id -g)" -v $$PWD:/home/marp/app/ -e LANG=$$LANG marpteam/marp-cli --allow-local-files --pptx $<
+	docker run -e MARP_USER="$(shell id -u):$(shell id -g)" -v $$PWD:/home/marp/app/ -e LANG="ja_JP.UTF-8" marpteam/marp-cli --allow-local-files --html --pptx $<
 
 clean:
 	rm -f *~ .*~
