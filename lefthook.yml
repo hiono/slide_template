@@ -46,7 +46,4 @@ pre-commit:
     prettier-yaml:
       glob: "*.{yaml,yml}"
       run: docker run -it --rm -v $PWD:/work -w /work ${REPOSITORY}:latest prettier --write --parser=yaml {staged_files}
-    prettier-markdown:
-      glob: "*.md"
-      run: docker run -it --rm -v $PWD:/work -w /work ${REPOSITORY}:latest prettier --write --parser=markdown {staged_files}
-  parallel: false
+  parallel: true
