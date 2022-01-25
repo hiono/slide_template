@@ -8,6 +8,12 @@
         "allowFullWidthExclamation": true, // + 全角！
         "allowHalfWidthQuestion": false, // + 半角?
         "allowFullWidthQuestion": true // + 全角？
+      },
+      "sentence-length": {
+        "max": 150
+      },
+      "max-comma": {
+        "max": 20
       }
     },
     // 日本語周りにおけるスペースの有無 ルールプリセット
@@ -23,7 +29,9 @@
         "ja-space-after-question": true // 文末疑問符の直後が別文なら全角スペースを入れる
       }
     },
-    "spellcheck-tech-word": true
+    "textlint-rule-proofdict": {
+      "dictURL": "https://hiono.github.io/proof-dictionary/"
+    }
   },
   "filters": {
     "comments": true
