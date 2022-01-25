@@ -32,18 +32,32 @@
 #       runner: node
 #     "any.go":
 #       runner: go run
+
 pre-commit:
   commands:
     markdownlint:
       glob: "*.md"
-      run: docker run -it --rm -v $PWD:/work -w /work ${REPOSITORY}:latest markdownlint {staged_files}
+      run: docker run -it --rm -e MARP_USER=$(id -u):$(id -g) -v $PWD:/home/marp/app ${REPOSITORY}:latest markdownlint {staged_files}
     textlint:
       glob: "*.md"
-      run: docker run -it --rm -v $PWD:/work -w /work ${REPOSITORY}:latest textlint {staged_files}
+      run: docker run -it --rm -e MARP_USER=$(id -u):$(id -g) -v $PWD:/home/marp/app ${REPOSITORY}:latest textlint {staged_files}
+    prettier-css:
+      glob: "*.{css,scss}"
+      run: docker run -it --rm -e MARP_USER=$(id -u):$(id -g) -v $PWD:/home/marp/app ${REPOSITORY}:latest prettier --write --parser=css {staged_files}
     prettier-js:
-      glob: ".textlintrc"
-      run: docker run -it --rm -v $PWD:/work -w /work ${REPOSITORY}:latest prettier --write --parser=json {staged_files}
+      glob: ".textlintrc,*.json"
+      run: docker run -it --rm -e MARP_USER=$(id -u):$(id -g) -v $PWD:/home/marp/app ${REPOSITORY}:latest prettier --write --parser=json5 {staged_files}
     prettier-yaml:
       glob: "*.{yaml,yml}"
-      run: docker run -it --rm -v $PWD:/work -w /work ${REPOSITORY}:latest prettier --write --parser=yaml {staged_files}
+      run: docker run -it --rm -e MARP_USER=$(id -u):$(id -g) -v $PWD:/home/marp/app ${REPOSITORY}:latest prettier --write --parser=yaml {staged_files}
   parallel: true
+fix:
+  commands:
+    textlint:
+      glob: "*.md"
+      run: docker run -it --rm -e MARP_USER=$(id -u):$(id -g) -v $PWD:/home/marp/app ${REPOSITORY}:latest textlint --fix {staged_files}
+toc:
+  commands:
+    pup:
+      glob: "*.md"
+      run: docker run -it --rm -e MARP_USER=$(id -u):$(id -g) -v $PWD:/home/marp/app ${REPOSITORY}:latest pup -f {staged_files} 'h2 json{}'
